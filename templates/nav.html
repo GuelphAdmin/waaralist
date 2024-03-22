@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guelph Waara List</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom CSS for the navbar */
+    .navbar-custom {
+      background-color: #37638b; /* Default background color */
+      transition: background-color 0.3s; /* Smooth transition effect */
+    }
+
+    .navbar-custom .nav-link2 {
+      color: rgb(253, 247, 247); /* Text color */
+      font-size: 30px;
+      text-align: right;
+    }
+
+    .navbar-custom .nav-link {
+      color: rgb(253, 247, 247); /* Text color */
+    }
+
+    .navbar-custom .nav-link:hover {
+      color: #3f08e4; /* Text color on hover */
+      background-color: #f9fcf9;
+    }
+
+    /* Active/current link */
+   
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container" ><div>
+        <p class="nav-link2"><b> Waara List - Guelph</b></p></div>
+       
+  
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+       
+        <li class="nav-item active">
+            <a href="{% url 'home'  %}" class="nav-link" href="#">HOME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          </li>
+          <li class="nav-item active">
+            <a href="{% url 'showmembers'  %}"  class="nav-link" href="#">Add Members &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          </li>
+        <li class="nav-item">
+          <a href="{% url 'configdata'  %}" class="nav-link" href="#">Member Admin Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </li>
+       
+        <li class="nav-item">
+          <a href="{% url 'resetall'  %}" class="nav-link" href="#">Reset Waara List &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% block content %}
+{% endblock %}
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
