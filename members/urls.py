@@ -4,6 +4,8 @@ from .import views
 
 urlpatterns = [
        path('otherpage/', views.home, name='home'),
+         path('', views.loginmain, name='loginmain'),
+
     path('memberdisplay/', views.displaymembers, name='showmembers'),
     path('adddata/', views.addmembersdata, name='addmembersdata'),
     #config page
@@ -18,10 +20,13 @@ urlpatterns = [
           path('markundone/<int:pk>', views.markasundone, name='markasundonename'),
                 #delete record
           path('delete/<int:pk>', views.deleterecord, name='deleterecord'),
+           
                  #LOIGN PAGE
           path('loginpage/', views.login, name='loginpage'),
+
                  #reset ALL records
           path('reset/', views.reset, name='resetall'),
-         path('subform/<int:pk>', views.subform, name='subform'),
+                    path('test/', views.reset, name='test'),
+       path('archive/', views.archive, name='archive'),
 ] 
 

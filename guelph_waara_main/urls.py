@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home,name='myhome'),
+   path('main/',views.home,name='myhome'),
+    path('',views.login,name='mylogin'),
     path('waaralist/',include('members.urls')),
 ]

@@ -1,4 +1,4 @@
-{% extends 'nav.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,10 +21,10 @@
     </style>
 </head>
 <body>
-    {% block content %}
+   
     <div class="container">
-        <h3 class="pt-5 text-center">Please provide Authentication for Waara Reset</h3>
-            <form  action ="{% url 'loginpage' %}"  method="POST">
+        <h3 class="pt-5 text-center"> Welcome to Guelph JK Admin </h3>
+            <form  action ="{% url 'mylogin' %}"  method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                   <label for="exampleInputEmail1">User Name</label>
@@ -45,8 +45,7 @@
             {% endif %}
     </div>
 
-    
-    {% endblock content %}
+
     
 </body>
 </html>

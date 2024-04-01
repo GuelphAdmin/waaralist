@@ -23,28 +23,75 @@
     {% block content %}
 
     <div class="container">
-        <h3 class="pt-5 text-center">Waara List as of - {% now "jS F Y" %}</h3><br>
+        <h3 class="pt-5 text-center">Guelph JK - Waara List as of - {% now "jS F Y" %}</h3><br>
         <div class="row">
             <h3><pre color="green">&nbsp;&nbsp;Pending Waara's                                          Waara already given</pre></h3   >
            
             <div class="col-md-7 col-lg-6.5" style="height: 600px; overflow: scroll;">
                 <!-- List of all the tasks for the day -->
                 {% for i in dictTask %}
-                <div class="card m-1" >
+                <div class="card m-1">
                     <div class="card-body">
                         {{i.pk}} - {{i.firstname}} - {{i.lastname}}  - {{i.phonenumber}}
-                        <span style="position: relative; float: right;">
-                            <a href="{% url 'markasdonename' i.pk %}" class="btn btn-success"><i class="fa fa-check"></i>Done</a>   
-
+                        <span style="position: relative; float: right; height: 5px;">
+                            <a class="btn btn-success" data-toggle="modal" data-target="#exampleModal-{{i.pk}}"><i class="fa fa-check"></i> Mark as Done</a>
                         </span>
-
-<!-- Modal -->
-
-
                     </div>
                 </div>
+                  <!-- Modal -->
                 
-
+  <div class="modal fade" id="exampleModal-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{% url 'markasdonename' i.pk %}" method="post">
+      {% csrf_token %}
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Select the Waara for {{i.firstname}}{{i.lastname}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form  action ="{% url 'markasdonename' i.pk %}"  method="POST">
+            {% csrf_token %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Ashaji" id="Ashaji" name="fruits">
+                <label class="form-check-label" for="Ashaji">Ashaji</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1st DUA" id="1stDUA" name="fruits">
+                <label class="form-check-label" for="1stDUA">1st DUA</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Tasbih" id="Tasbih" name="fruits">
+                <label class="form-check-label" for="Tasbih">Tasbih</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Ginan" id="Ginan" name="fruits">
+                <label class="form-check-label" for="Ginan">Ginan</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Farman" id="Farman" name="fruits">
+                <label class="form-check-label" for="Farman">Farman</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="AwalSufro" id="AwalSufro" name="fruits">
+                <label class="form-check-label" for="AwalSufro">AwalSufro</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="2nd DUA" id="2ndDUA" name="fruits">
+                <label class="form-check-label" for="2ndDUA">2nd DUA</label>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <a href="{% url 'markasdonename' i.pk %}" class="btn btn-warning"><i class="fa fa-check"></i> Done</a>    -->   
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div></form>
+  <!-- END OF Modal -->
                 {% endfor %}
             </div>
               
@@ -54,7 +101,7 @@
                 <!-- List of all the tasks that have completed -->
                 <div class="card m-1">
                     <div class="card-body">
-                        {{i.pk}} - {{i.firstname}} - {{i.lastname}}  - {{i.phonenumber}} <br> {{i.updated_at.day}}-{{i.updated_at.month}}-{{i.updated_at.year}}
+                        {{i.pk}} - {{i.firstname}} - {{i.lastname}}  -  {{i.phonenumber}} <br> {{i.waara}} on {{i.updated_at.day}}-{{i.updated_at.month}}-{{i.updated_at.year}}
                         <span style="position: relative; float: right; height: 5px;" >
                             <a href="{% url 'markasundonename' i.pk %}" class="btn btn-warning"><i class="fa fa-check"></i> UnDone</a>                          
                     </span>

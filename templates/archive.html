@@ -1,0 +1,77 @@
+{% extends 'nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waara List - Home</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        .form-control{
+        padding: 0rem 1rem !important;
+        }
+   
+        </style>
+</head>
+<body>
+    {% block content %}
+    <br><br>
+    <div class="container">
+        <form action ="{% url 'archive' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <span style="display: flex;">
+                   <input type="text" name="searchwaara" class="form-control" placeholder="YYYY-MM-DD" >
+              
+                <button type="submit" class="btn btn-primary" style="width: 250px; height:40px;">Search Waaras</button>  
+                &nbsp;&nbsp;
+            </span>
+              
+            </div>
+
+        </form>
+        <br>
+                                 
+           
+                <table class="table table-striped"> 
+    
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Type of Waaara</th>
+                      </tr>
+                  
+                    </thead>
+                    {% for i in dictTask%}  
+                    <tbody>
+                        
+                      <tr>
+
+                        <td>{{i.firstname}}&nbsp;&nbsp;&nbsp
+                
+                      
+                      </span>
+                        </td>
+                        <td>{{i.lastname}}</td>
+                        <td>{{i.phonenumber}}</td>
+                        <td>{{i.waara}}</td>
+                      </tr>
+                    </tbody>
+                
+                         
+                    {% endfor %}
+                  </table>
+                
+       
+    </div>{% endblock content %}
+</body>
+</html>

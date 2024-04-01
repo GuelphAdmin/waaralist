@@ -4,6 +4,8 @@ from django.db import models
 class memberdetails(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
+    waara = models.CharField(max_length=50)
+    blankplace = models.CharField(max_length=50)
     phonenumber = models.CharField(max_length=20)
     is_completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add = True)
@@ -16,3 +18,22 @@ class memberdetails(models.Model):
 
 def __str__(self):
     return self.firstname
+
+class waaradata(models.Model):
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    waara = models.CharField(max_length=50)
+    blankplace = models.CharField(max_length=50)
+    phonenumber = models.CharField(max_length=20)
+    is_completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    class Meta:
+        verbose_name = 'waaradatas'
+        verbose_name_plural = 'waaradata'
+
+
+def __str__(self):
+    return self.firstname
+

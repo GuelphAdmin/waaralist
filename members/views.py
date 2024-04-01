@@ -2,7 +2,7 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render 
-from  .models import memberdetails
+from  .models import memberdetails,waaradata
 from django.contrib.auth import authenticate, login as dj_login,  logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -69,20 +69,23 @@ def edit(request,pk):
 #MARK AS DONE
 def markasdone(request, pk):
     markasdonetask = get_object_or_404(memberdetails, pk=pk)
-    print("TEST TEST TEST")
-    print(pk)
-    markasdonetask.is_completed = True
-    markasdonetask.save()
     waaras2 = request.POST.getlist('fruits')
-    print('TEST WAARA')
-    print(', '.join(waaras2))
- 
+    waaratype = (', '.join(waaras2))
+    markasdonetask.is_completed = True
+    markasdonetask.waara = waaratype
+    markasdonetask.save()
+    waaradata.objects.create(firstname=markasdonetask.firstname,lastname=markasdonetask.lastname,phonenumber=markasdonetask.phonenumber,waara=waaratype,is_completed=True)
+  
+  
+
+
     return redirect('myhome') 
-    
+   
 
 def markasundone(request, pk):
     markasdonetask = get_object_or_404(memberdetails, pk=pk)
     markasdonetask.is_completed = False
+    markasdonetask.waara = ""
     markasdonetask.save()
     return redirect('myhome') 
 
@@ -100,6 +103,8 @@ def reset(request):
  #  reset = memberdetails.objects.all().update(is_completed=False)
      return render(request,'login.html') 
 
+
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -109,28 +114,41 @@ def login(request):
                 dj_login(request, user)
                 #success page
                 reset = memberdetails.objects.all().update(is_completed=False)
+                waarareset = memberdetails.objects.all().update(waara="")
                 return redirect('myhome')
         else:
                 messages.success(request,'Invalid UserName or Password')
                 return render(request, 'login.html')
                # return render(request, 'login.html')
-def test(request):
-
-        return render(request,'test.html') 
 
 
 
-# sub form
-def subform(request,pk):
-    getedit = get_object_or_404(memberdetails, pk=pk)
-    if request.method == 'POST':
-        waaras2 = request.POST.getlist('fruits')
-        print('TEST WAARA')
-        print(', '.join(waaras2))
-    else: 
 
+
+def loginmain(request):
+ #  reset = memberdetails.objects.all().update(is_completed=False)
+     return render(request,'loginmain.html') 
+
+def testview(request,pk):
+        getedit = memberdetails.objects.filter(pk=pk)
         context = {
                        'dictTask':getedit,
                   }
+        return render(request,'test.html',context) 
 
-    return render(request, 'subform.html',context)
+
+def archive(self):
+    #tasks = memberdetails.objects.filter(is_completed=False).order_by('updated_at')
+    #context = {
+     #                   'dictTask':tasks,
+      #          }
+    query = self.GET.get('searchwaara','')
+    print(query)
+    #query = 'Imran'
+  
+    data = waaradata.objects.filter(created_at__icontains=query).order_by('updated_at')
+    context = {
+                        'dictTask':data,
+                        
+                }
+    return render(self,'archive.html',context) 

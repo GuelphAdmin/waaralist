@@ -46,7 +46,7 @@
                 {% for i in dictTask %}
                 <div class="card m-1">
                     <div class="card-body">
-                        {{i.pk}} - {{i.firstname}} - {{i.lastname}} <br> Phone - {{i.phonenumber}}
+                        {{i.pk}} - {{i.firstname}} - {{i.lastname}} <br> Phone - {{i.phonenumber}} {{i.waara}} on {{i.updated_at.day}}-{{i.updated_at.month}}-{{i.updated_at.year}}
                         <span style="position: relative; float: right;">
                             <a href="{% url 'markasdonename' i.pk %}" class="btn btn-success"><i class="fa fa-check"></i>Done</a>
 
@@ -63,7 +63,7 @@
                 <!-- List of all the tasks that have completed -->
                 <div class="card m-1">
                     <div class="card-body">
-                        {{i.pk}} - {{i.firstname}} - {{i.lastname}} <br> Phone - {{i.phonenumber}}
+                        {{i.pk}} - {{i.firstname}} - {{i.lastname}} Phone - {{i.phonenumber}}  <br>  {{i.waara}} on {{i.updated_at.day}}-{{i.updated_at.month}}-{{i.updated_at.year}}
                         <span style="position: relative; float: right;">
                             <a href="{% url 'markasundonename' i.pk %}" class="btn btn-warning"><i class="fa fa-check"></i> Mark as UnDone</a>
 
